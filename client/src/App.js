@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { getUsers } from './services/api';
 
 function App() {
+  const [users, setUsers] = useState([]); // State to store users
+
+  // Fetch users when the component mounts
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await getUsers(); // Call the API
+      setUsers(data); // Store the data in state
+    };
+    fetchUsers();
+  }, []); // Empty array ensures this runs only once
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>User List</h1>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>{user.name}</li> // Display each user's name
+        ))}
+      </ul>
     </div>
   );
 }
