@@ -18,11 +18,16 @@ function App() {
       <h1>User List</h1>
       <ul>
         {users.map((user, index) => (
-          <li key={index}>{user.name}</li> // Display each user's name
+          <li key={index}>
+            <h3>{user.name}</h3> {/* Display user's name */}
+            <p>Email: {user.email}</p> {/* Display user's email */}
+            <p>Age: {user.age}</p>     {/* Display user's age */}
+          </li>
         ))}
       </ul>
     </div>
   );
+  
 }
 
 export default App;
