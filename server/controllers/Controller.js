@@ -41,6 +41,22 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+
+// Get all users from MongoDB
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find(); // Fetch all users from MongoDB
+    res.json(users); // Send users as response
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+
+
 const getUserProfile = (req, res) => {
   res.json({
     message: 'User profile accessed successfully',
@@ -48,7 +64,8 @@ const getUserProfile = (req, res) => {
   });
 };
 
-module.exports = { registerUser, loginUser, getUserProfile };
+
+module.exports = { registerUser, loginUser, getUserProfile, getAllUsers };
 
 
-module.exports = { registerUser, loginUser };
+
